@@ -1,0 +1,22 @@
+# Security log and evidence files
+*.log
+*.pcap
+*.pcapng
+*.evtx
+*.zip
+
+# Credentials and environment files
+.env
+secrets.txt
+
+# Virtual machines and editor settings
+Virtual Machines/
+.vscode/
+
+# Python temporary files
+__pycache__/
+*.pyc
+
+# Operating system files
+.DS_Store
+Thumbs.db
