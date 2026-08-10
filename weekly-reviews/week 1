@@ -1,0 +1,109 @@
+# Week 1 Home Lab Review
+
+## Overview
+
+During Week 1, I established the foundation of a Windows security monitoring lab. I prepared a structured GitHub repository, documented the lab architecture, configured a Windows 10 virtual machine and investigated Windows and PowerShell telemetry.
+
+## Activities Completed
+
+### Repository and Documentation Setup
+
+- Created a GitHub repository for the SOC analyst portfolio.
+- Organised folders for Windows security investigations, screenshots, diagrams and weekly reviews.
+- Used Markdown to document practical lab activities.
+- Applied descriptive filenames and commit messages.
+
+### Home Lab Architecture
+
+- Designed an initial SOC home lab architecture.
+- Identified the Windows virtual machine as the monitored endpoint.
+- Documented the relationship between the endpoint, Windows logs and future SIEM tools.
+
+### Windows Virtual Machine
+
+- Installed Windows 10 in VirtualBox.
+- Created an administrator account and a standard lab account.
+- Confirmed that Windows Defender and Windows Firewall were active.
+- Installed Windows updates where available.
+- Created a clean VirtualBox snapshot.
+
+### Windows Event Viewer Investigation
+
+- Explored the Security, System, Application and PowerShell logs.
+- Generated controlled successful and failed login activity.
+- Investigated Windows Security Event IDs 4624, 4625 and 4634.
+- Recorded the account, timestamp, computer and logon details.
+- Distinguished normal activity from automatically suspicious activity.
+
+### PowerShell Logging Investigation
+
+- Executed harmless PowerShell commands, including Get-Date, Get-Process, Get-Service, Get-LocalUser and Get-NetTCPConnection.
+- Reviewed PowerShell Operational events.
+- Enabled Script Block Logging and Module Logging.
+- Examined Event IDs 4103 and 4104.
+- Identified automatically generated NetTCPIP module code.
+- Learned that a logged function definition does not prove that the function was executed.
+- Documented the limitations of basic PowerShell visibility.
+
+## Skills Developed
+
+- VirtualBox configuration
+- Windows 10 administration
+- Windows Event Viewer navigation
+- Security event filtering
+- Windows Event ID interpretation
+- Successful and failed logon analysis
+- PowerShell logging configuration
+- Script block interpretation
+- Basic telemetry correlation
+- Markdown documentation
+- Git and GitHub organisation
+- Evidence-based analyst writing
+
+## Problems Encountered
+
+### VirtualBox Critical Error
+
+VirtualBox displayed a “Guru Meditation” critical error while the Windows virtual machine was running.
+
+### Limited PowerShell Visibility
+
+After executing Get-NetTCPConnection, the newest PowerShell event initially did not reflect the expected command. The event later examined contained extensive automatically generated NetTCPIP module code rather than a simple copy of the command entered.
+
+### Complex PowerShell Events
+
+Some PowerShell events contained functions such as Get-NetUDPEndpoint and Set-NetTCPSetting, even though these functions were not directly entered by the user. This made the events difficult to interpret initially.
+
+## Solutions Applied
+
+- Reviewed and adjusted the VirtualBox configuration before restarting the virtual machine.
+- Refreshed Event Viewer and confirmed that the correct PowerShell Operational log was selected.
+- Enabled PowerShell Script Block Logging and Module Logging through Group Policy.
+- Applied the policies using gpupdate.
+- Correlated Event IDs 4103 and 4104 with command history and execution time.
+- Distinguished automatically loaded module code from commands directly entered by the user.
+
+## Key Lessons
+
+- One Windows event should not be analysed in isolation.
+- A failed login is not automatically evidence of an attack.
+- PowerShell module code may appear in logs even when the corresponding function was not directly executed.
+- Event timestamps, users, process information and related events are needed to establish context.
+- The absence of telemetry does not prove that an action did not happen.
+- Security conclusions must be supported by the available evidence.
+
+## Remaining Questions
+
+- How can PowerShell events be correlated with process-creation events?
+- How can command-line information be captured consistently?
+- How can logs from multiple Windows systems be searched centrally?
+- What additional visibility will Sysmon provide?
+- How will a SIEM distinguish routine PowerShell activity from suspicious activity?
+
+## Plan for Week 2
+
+During Week 2, I will improve Windows endpoint telemetry using Sysmon. I will study Sysmon configuration, process creation, parent-child process relationships, network connections and file activity. I will continue documenting observed facts separately from analyst interpretation.
+
+## Conclusion
+
+Week 1 established the foundation of the home lab and introduced Windows telemetry analysis. The most important lesson was that security logs require context: the presence of an event does not automatically establish malicious activity, while incomplete logging can limit the conclusions an analyst can make.
